@@ -1,0 +1,24 @@
+/*
+PET FEEDER Stepper Motor
+*/
+
+#include <Stepper.h>
+const int stepsPerRevolution = 200;  // change this to fit the number of steps per revolution
+Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
+
+void setup()
+{
+  pinMode(A1, INPUT_PULLUP); // Set the A1 pin to a pushbutton in pullup mode
+  Serial.begin(9600);
+  myStepper.setSpeed(60); // Sets the speed the motor moves at
+}
+
+void loop()
+{
+
+  if (!digitalRead(A1)) // Check for the Blue button input
+  {
+    myStepper.step(stepsPerRevolution); //Set the stepper motor to move
+    delay(5000);  //Delay 5000ms (5seconds) before stopping the motor from moving
+  }
+}
